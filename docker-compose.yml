@@ -1,0 +1,10 @@
+version: '2'
+services:
+    ruby:
+        container_name: zpw-ruby
+        build: ./docker
+        image: mfrankiewicz/zpw-ruby
+        ports:
+            - "80:80"
+        volumes:
+            - ./app:/app
