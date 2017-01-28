@@ -6,10 +6,12 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Age</th>
       <th>Address</th>
       <th>Price</th>
       <th>Email address</th>
       <th>Phone</th>
+      <th>Event id</th>
       <th>Seat id seq</th>
       <th colspan="3"></th>
     </tr>
@@ -19,10 +21,12 @@
     <% @tickets.each do |ticket| %>
       <tr>
         <td><%= ticket.name %></td>
+        <td><%= ticket.age %></td>
         <td><%= ticket.address %></td>
         <td><%= ticket.price %></td>
         <td><%= ticket.email_address %></td>
         <td><%= ticket.phone %></td>
+        <td><%= ticket.event_id %></td>
         <td><%= ticket.seat_id_seq %></td>
         <td><%= link_to 'Show', ticket %></td>
         <td><%= link_to 'Edit', edit_ticket_path(ticket) %></td>

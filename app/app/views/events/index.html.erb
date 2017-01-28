@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Tickets</h1>
+<h1>Events</h1>
 <% if flash[:message] %>
    <p id="message"><%= flash[:message] %></p>
  <% end %>
@@ -13,6 +13,8 @@
       <th>Price low</th>
       <th>Price high</th>
       <th>Event date</th>
+      <th>Adult restriction</th>
+      <th>Seat count</th>
       <th>Tickets sold</th>
       <th colspan="3"></th>
     </tr>
@@ -26,6 +28,8 @@
         <td><%= event.price_low %></td>
         <td><%= event.price_high %></td>
         <td><%= event.event_date %></td>
+        <td><%= event.adult %></td>
+        <td><%= event.seat_count %></td>
         <td><%= event.tickets.count %></td>
         <td>x</td>
         <td>x</td>
