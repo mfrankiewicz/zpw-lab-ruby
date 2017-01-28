@@ -7,7 +7,7 @@ class UserController < ApplicationController
             if @user.valid? == false
                 render 'login'
             else
-                session[:admin] = true
+                session[:authorized] = true
                 redirect_to root_path
             end
         end

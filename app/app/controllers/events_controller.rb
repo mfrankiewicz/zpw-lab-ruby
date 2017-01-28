@@ -1,11 +1,13 @@
 class EventsController < ApplicationController
     before_action :set_ticket, only: [:show, :edit, :update, :destroy]
     before_action :check_admin
+    before_action :verify_access, only: [:new, :create, :edit, :update, :destroy]
     def index
-        if @admin
+
+        if @authorized
             @events = Event.all
         else
-            @events = Event.where("event_date < ?", Date.today)
+            @events = Event.where("event_date > ?", Date.today)
         end
     end
 
@@ -59,6 +61,12 @@ class EventsController < ApplicationController
     end
 
     def check_admin
-        @admin = session[:admin]
+        @authorized = session[:authorized]
+    end
+
+    def verify_access
+        if !@authorized
+            redirect_to root_path
+        end
     end
 end

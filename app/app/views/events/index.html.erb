@@ -5,10 +5,17 @@
    <p id="message"><%= flash[:message] %></p>
  <% end %>
 
+<div>
+    <%= form_for :filters, url: "events", method: "get" do |form| %>
+        <%= form.text_field :date_from %>
+        <%= form.text_field :date_to %>
+        <%= form.submit 'filter' %>
+    <% end  %>
+</div>
 <table>
   <thead>
     <tr>
-      <% if @admin %>
+      <% if @authorized %>
         <th>Status</th>
       <% end %>
       <th>Artist</th>
@@ -18,7 +25,9 @@
       <th>Event date</th>
       <th>Adult restriction</th>
       <th>Seat count</th>
-      <th>Tickets sold</th>
+      <% if @authorized %>
+        <th>Tickets sold</th>
+      <% end %>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -26,7 +35,7 @@
   <tbody>
     <% @events.each do |event| %>
       <tr>
-        <% if @admin %>
+        <% if @authorized %>
           <td>
               <% if event.event_date <  Date.today %>
                 archive
@@ -42,10 +51,14 @@
         <td><%= event.event_date %></td>
         <td><%= event.adult %></td>
         <td><%= event.seat_count %></td>
+        <% if @authorized %>
         <td><%= event.tickets.count %></td>
+        <% end %>
         <td><%= link_to 'Show', event %></td>
+        <% if @authorized %>
         <td><%= link_to 'Edit', edit_event_path(event) %></td>
         <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -53,4 +66,6 @@
 
 <br>
 
+<% if @authorized %>
 <%= link_to 'New Event', new_event_path %>
+<% end %>

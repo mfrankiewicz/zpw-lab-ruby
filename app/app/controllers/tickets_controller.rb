@@ -1,5 +1,7 @@
 class TicketsController < ApplicationController
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
+  before_action :check_admin
+  before_action :verify_access, only: [:destroy]
 
   # GET /tickets
   # GET /tickets.json
@@ -70,5 +72,15 @@ class TicketsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def ticket_params
       params.require(:ticket).permit(:name, :address, :price, :email_address, :phone, :seat_id_seq, :age, :event_id)
+    end
+
+    def check_admin
+        @authorized = session[:authorized]
+    end
+
+    def verify_access
+        if !@authorized
+            redirect_to root_path
+        end
     end
 end
