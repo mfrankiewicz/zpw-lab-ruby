@@ -8,7 +8,7 @@ class EventsController < ApplicationController
   end
 
   def create
-      @event = Event.new(params[:event])
+      @event = Event.new(event_params)
       if @event.save
           flash[:message] = 'Event został poprawnie stworzony.'
           redirect_to events_path
@@ -16,4 +16,8 @@ class EventsController < ApplicationController
           render :action => "new"
       end
   end
+
+    def event_params
+        params.require(:event).permit(:artist, :description, :price_low, :price_high, :seat_count, :event_date, :adult)
+    end
 end
