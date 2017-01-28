@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
     before_action :set_ticket, only: [:show, :edit, :update, :destroy]
+    before_action :check_admin
     def index
-        @admin = true;
         if @admin
             @events = Event.all
         else
@@ -53,7 +53,12 @@ class EventsController < ApplicationController
     def set_ticket
         @event = Event.find(params[:id])
     end
+
     def event_params
         params.require(:event).permit(:artist, :description, :price_low, :price_high, :seat_count, :event_date, :adult)
+    end
+
+    def check_admin
+        @admin = session[:admin]
     end
 end

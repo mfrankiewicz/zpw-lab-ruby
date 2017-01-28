@@ -5,9 +5,9 @@ Rails.application.routes.draw do
 
   get 'index/index'
 
-  get 'user/index'
+  get 'user/login', to: 'user#login'
 
-  post 'user/login'
+  post 'user/login', to: 'user#login'
 
   resources :tickets
   root :to => "index#index"

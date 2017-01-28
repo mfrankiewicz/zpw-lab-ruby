@@ -1,8 +1,21 @@
 class UserController < ApplicationController
-  def index
-      @user = User.new
-  end
+    def login
+        @user = User.new
 
-  def login
-  end
+        if request.post?
+            @user = User.new(user_params)
+            if @user.valid? == false
+                render 'login'
+            else
+                session[:admin] = true
+                redirect_to root_path
+            end
+        end
+
+    end
+
+    private
+    def user_params
+        params.require(:user).permit(:email, :password)
+    end
 end
