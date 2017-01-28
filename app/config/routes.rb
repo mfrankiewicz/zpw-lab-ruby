@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'login/index'
+
+  get 'login/login'
+
   get 'index/index'
 
   resources :tickets

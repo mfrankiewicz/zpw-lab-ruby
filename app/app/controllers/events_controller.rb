@@ -1,7 +1,12 @@
 class EventsController < ApplicationController
     before_action :set_ticket, only: [:show, :edit, :update, :destroy]
     def index
-        @events = Event.all
+        @admin = true;
+        if @admin
+            @events = Event.all
+        else
+            @events = Event.where("event_date < ?", Date.today)
+        end
     end
 
     def new

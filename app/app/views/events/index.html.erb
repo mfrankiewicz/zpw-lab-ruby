@@ -8,6 +8,9 @@
 <table>
   <thead>
     <tr>
+      <% if @admin %>
+        <th>Status</th>
+      <% end %>
       <th>Artist</th>
       <th>Description</th>
       <th>Price low</th>
@@ -23,6 +26,15 @@
   <tbody>
     <% @events.each do |event| %>
       <tr>
+        <% if @admin %>
+          <td>
+              <% if event.event_date <  Date.today %>
+                archive
+              <% else %>
+                active
+              <% end %>
+          </td>
+        <% end %>
         <td><%= event.artist %></td>
         <td><%= event.description %></td>
         <td><%= event.price_low %></td>
