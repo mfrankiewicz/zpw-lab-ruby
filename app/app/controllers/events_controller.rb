@@ -18,9 +18,11 @@ class EventsController < ApplicationController
 
         @eventsRes.each do |event|
 
-            if @date_from.to_date != nil && @date_to.to_date != nil
-                if event.event_date >= @date_from.to_date && event.event_date <= @date_to.to_date
-                    @events << event
+            if @date_from != nil && @date_to != nil
+                if @date_from.to_date != nil && @date_to.to_date != nil
+                    if event.event_date >= @date_from.to_date && event.event_date <= @date_to.to_date
+                        @events << event
+                    end
                 end
             else
                 @events << event

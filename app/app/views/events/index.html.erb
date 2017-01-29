@@ -12,8 +12,10 @@
         <%= form.submit 'filter' %>
     <% end  %>
 
-    <% if @date_from.to_date != nil && @date_to.to_date != nil %>
+    <% if @date_from != nil && @date_to != nil %>
+        <% if @date_from.to_date != nil && @date_to.to_date != nil %>
         Sorting by date from <strong><%= @date_from %></strong> to <strong><%= @date_to %></strong>
+        <% end %>
     <% end %>
 </div>
 <table>
