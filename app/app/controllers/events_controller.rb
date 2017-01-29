@@ -23,6 +23,8 @@ class EventsController < ApplicationController
                     if event.event_date >= @date_from.to_date && event.event_date <= @date_to.to_date
                         @events << event
                     end
+                else
+                    @events << event
                 end
             else
                 @events << event
