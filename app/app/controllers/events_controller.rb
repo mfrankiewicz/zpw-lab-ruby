@@ -5,10 +5,30 @@ class EventsController < ApplicationController
     def index
 
         if @authorized
-            @events = Event.all
+            @eventsRes = Event.all
         else
-            @events = Event.where("event_date > ?", Date.today)
+            @eventsRes = Event.where("event_date > ?", Date.today)
         end
+
+        @events = []
+        if request.query_parameters != nil && request.query_parameters[:filters] != nil
+            @date_from = request.query_parameters[:filters][:date_from]
+            @date_to = request.query_parameters[:filters][:date_to]
+        end
+
+        @eventsRes.each do |event|
+
+            if @date_from.to_date != nil && @date_to.to_date != nil
+                if event.event_date >= @date_from.to_date && event.event_date <= @date_to.to_date
+                    @events << event
+                end
+            else
+                @events << event
+            end
+
+        end
+
+
     end
 
     def new

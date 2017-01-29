@@ -7,10 +7,14 @@
 
 <div>
     <%= form_for :filters, url: "events", method: "get" do |form| %>
-        <%= form.text_field :date_from %>
-        <%= form.text_field :date_to %>
+        <%= form.text_field :date_from, placeholder: "rrrr-mm-dd" %>
+        <%= form.text_field :date_to, placeholder: "rrrr-mm-dd" %>
         <%= form.submit 'filter' %>
     <% end  %>
+
+    <% if @date_from.to_date != nil && @date_to.to_date != nil %>
+        Sorting by date from <strong><%= @date_from %></strong> to <strong><%= @date_to %></strong>
+    <% end %>
 </div>
 <table>
   <thead>
